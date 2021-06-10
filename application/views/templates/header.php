@@ -8,7 +8,7 @@
   <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
 </head>
 
-<body>
+<body style="margin: 20px;">
   <ul class="nav">
     <li class="nav-item">
       <a class="nav-link active" href="<?php echo base_url() ?>">Home</a>
