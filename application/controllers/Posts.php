@@ -30,6 +30,11 @@ class Posts extends CI_Controller
 
     public function create()
     {
+
+        if (!$this->session->userdata('logged_in')) {
+            redirect('users/login');
+        }
+
         $data['title'] = 'create Post';
         $data['categories'] = $this->post_model->get_categories();
         $this->form_validation->set_rules('title', 'Title', 'required');
@@ -68,6 +73,11 @@ class Posts extends CI_Controller
 
     public function delete($id)
     {
+
+        if (!$this->session->userdata('logged_in')) {
+            redirect('users/login');
+        }
+
         $this->post_model->delete_post($id);
         $this->session->set_flashdata('posts_deleted', 'You post has been deleted');
 
@@ -76,7 +86,16 @@ class Posts extends CI_Controller
 
     public function edit($slug)
     {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('users/login');
+        }
+
         $data['post'] = $this->post_model->get_posts($slug);
+        // check user
+        if ($this->session->userdata('user_id') != $this->post_model->get_posts($slug)[0]['user_id']) {
+            redirect('posts');
+        }
+
         $data['categories'] = $this->post_model->get_categories();
         if (empty($data['post'])) {
             show_404();
@@ -90,6 +109,10 @@ class Posts extends CI_Controller
 
     public function update()
     {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('users/login');
+        }
+
         $this->post_model->update_post();
         $this->session->set_flashdata('posts_updated', 'You post has been updated');
         redirect('posts');

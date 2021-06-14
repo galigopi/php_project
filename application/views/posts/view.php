@@ -9,11 +9,15 @@
 </div>
 
 <hr>
-<a class="btn btn-defalut pull-left" href="<?php echo base_url(); ?>posts/edit/<?php echo $post[0]['slug']; ?>">Edit</a>
 
-<?php echo form_open('posts/delete/' . $post[0]['id']); ?>
-<input type="submit" value="Delete" class="btn btn-danger">
-</form>
+<?php if ($this->session->userdata('logged_in')) : ?>
+    <a class="btn btn-defalut pull-left" href="<?php echo base_url(); ?>posts/edit/<?php echo $post[0]['slug']; ?>">Edit</a>
+
+    <?php echo form_open('posts/delete/' . $post[0]['id']); ?>
+    <input type="submit" value="Delete" class="btn btn-danger">
+    </form>
+
+<?php endif; ?>
 
 <h3>Comments</h3>
 <?php if ($comments) : ?>
