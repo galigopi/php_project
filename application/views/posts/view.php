@@ -10,7 +10,7 @@
 
 <hr>
 
-<?php if ($this->session->userdata('logged_in')) : ?>
+<?php if ($this->session->userdata('user_id')==$post[0]['user_id']) : ?>
     <a class="btn btn-defalut pull-left" href="<?php echo base_url(); ?>posts/edit/<?php echo $post[0]['slug']; ?>">Edit</a>
 
     <?php echo form_open('posts/delete/' . $post[0]['id']); ?>
